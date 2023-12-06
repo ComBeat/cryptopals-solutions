@@ -4,6 +4,7 @@
 #
 # How? Devise some method for "scoring" a piece of English plaintext. Character frequency is a good metric. Evaluate each output and choose the one with the best score.
 import binascii
+import cryptography
 
 freqs = {
     'a': 0.0651738,
@@ -37,7 +38,8 @@ freqs = {
 
 
 def score(c):
-    i = c.lower()
+    score = 0
+    return score
 
 
 def find_xor_char(s):

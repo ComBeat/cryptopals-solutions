@@ -42,14 +42,16 @@ def score(s):
 
 def breakSingleByteXOR(s):
     def key(p):
-        #print(f"{p=}")
-        #print(f"{score(p[1])=}")
+        print(f"{p=}")
+        print(f"{p[1]=}")
+        print(f"{score(p[1])=}\n")
         return score(p[1])
+    #print(max([(i, strxor_c(s, i)) for i in range(0, 256)]))
     return max([(i, strxor_c(s, i)) for i in range(0, 256)], key=key)
     #return [(i, strxor_c(s, i)) for i in range(0, 256)]
 
 if __name__ == '__main__':
     encodedS = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
     s = binascii.unhexlify(encodedS)
-    print(s)
+    #print(s)
     print(breakSingleByteXOR(s))
