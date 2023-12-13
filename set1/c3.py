@@ -37,59 +37,35 @@ freqs = {
 }
 
 
-def score(c):
+def get_score(s2):
     score = 0
+    for i in s2:
+        c = chr(i).lower()
+        if c in freqs:
+            score += freqs[c]
     return score
 
 
-def find_xor_char(s):
+def find_xor_char(s1):
+    # I know this is inefficient. Maybe I will improve it in the future lol
+    result_list = []
+    for u in range(256):
+        result_string = ""
+        for c in s1:
+            result_char = chr(c ^ u)
+            result_string += result_char
+        result_list.append((get_score(bytearray(result_string, 'utf-8')), u))
+
+    xor_key = max(result_list)[1]
+    result_string = ""
+    for c in s1:
+        result_char = chr(c ^ xor_key)
+        result_string += result_char
+
+    return (xor_key, result_string)
 
 
 if __name__ == "__main__":
-    if False:
-        hex_var = 0x1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736
-        # hex_var = '573908803ff9899a9889c00090f873784bcaff'
-        ascii_string = binascii.unhexlify(hex_var).decode("utf-8")
-
-        print(ascii_string)
-        bin_var = format(hex_var, 'b')
-        # bin_var = bin(hex_var)
-        ascii_char_indexes = list(range(32, 127))
-
-        # Fill String with necessary leading 0's
-        if len(bin_var) % 8 != 0:
-            print(len(bin_var))
-            i = 8 - (len(bin_var) % 8)
-            for x in range(i):
-                bin_var = '0' + bin_var
-
-            print(len(bin_var))
-
-        # Slice binary string into bytes
-        x = 8
-        bin_var = [bin_var[y - x:y] for y in range(x, len(bin_var) + x, x)]
-        print(len(bin_var))
-
-        bla = ""
-        for i in bin_var:
-            bla += chr(int(i))
-
-        print(len(bla))
-
-        char_count = {}
-        for i in bin_var:
-            char_count[i] = bin_var.count(i)
-            print(f"{i} = {bin_var.count(i)}")
-        #for i in ascii_char_indexes:
-         #   print(chr(int(i)))
-
-        print(char_count)
-        print(max(char_count.values()))
-        max_keys = [key for key, value in char_count.items() if value == max(char_count.values())]
-        print(max_keys)
-        s = binascii.unhexlify("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")
-        print(s)
-
     hex_var = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
     ascii_string = binascii.unhexlify(hex_var)
-    print(ascii_string)
+    print(find_xor_char(ascii_string))
