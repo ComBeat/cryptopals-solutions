@@ -10,8 +10,8 @@ if __name__ == "__main__":
     with open('c4.txt') as f:
         lines = f.readlines()
     lines = list(map(str.strip, lines))
-    print(lines)
 
     for i in lines:
         ascii_string = binascii.unhexlify(i)
-        print(c3.find_xor_char(ascii_string))
+        result_list.append(c3.find_xor_char(ascii_string))
+    print(max(result_list))
