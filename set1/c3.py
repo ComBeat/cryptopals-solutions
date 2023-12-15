@@ -54,15 +54,9 @@ def find_xor_char(s1):
         for c in s1:
             result_char = chr(c ^ u)
             result_string += result_char
-        result_list.append((get_score(bytearray(result_string, 'utf-8')), u))
+        result_list.append((get_score(bytearray(result_string, 'utf-8')), u, result_string))
 
-    xor_key = max(result_list)[1]
-    result_string = ""
-    for c in s1:
-        result_char = chr(c ^ xor_key)
-        result_string += result_char
-
-    return (xor_key, result_string)
+    return max(result_list)
 
 
 if __name__ == "__main__":
