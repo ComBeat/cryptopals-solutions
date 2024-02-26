@@ -44,7 +44,8 @@ if __name__ == '__main__':
     test1 = "this is a test"
     test2 = "wokka wokka!!!"
     expected_difference = 37
-    actual_difference = hamming_distance(base64.b64encode(bytes(test1, 'utf-8')), base64.b64encode(bytes(test2, 'utf-8')))
+    actual_difference = hamming_distance(base64.b64encode(bytes(test1, 'utf-8')),
+                                         base64.b64encode(bytes(test2, 'utf-8')))
 
     with open('c6.txt') as f:
         fcontent = f.readlines()
