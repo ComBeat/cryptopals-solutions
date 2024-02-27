@@ -19,6 +19,7 @@
 #
 # This code is going to turn out to be surprisingly useful later on. Breaking repeating-key XOR ("Vigenere") statistically is obviously an academic exercise, a "Crypto 101" thing. But more people "know how" to break it than can actually break it, and a similar technique breaks something much more important.
 import base64
+import sys
 
 
 def hamming_distance(s1, s2):
@@ -41,17 +42,30 @@ def hamming_distance(s1, s2):
 
 if __name__ == '__main__':
     keysize = range(2, 41)
-    test1 = "this is a test"
-    test2 = "wokka wokka!!!"
-    expected_difference = 37
-    actual_difference = hamming_distance(base64.b64encode(bytes(test1, 'utf-8')),
-                                         base64.b64encode(bytes(test2, 'utf-8')))
+    test1 = b"this is a test"
+    test2 = b"wokka wokka!!!"
+    test_expected_difference = 37
+    #test_actual_difference = hamming_distance(base64.b64encode(bytes(test1, 'utf-8')), base64.b64encode(bytes(test2, 'utf-8')))
+    test_actual_difference = hamming_distance(base64.b64encode(test1), base64.b64encode(test2))
 
-    with open('c6.txt') as f:
-        fcontent = f.readlines()
+    with open('c6.txt', 'rb') as f:
+        # fcontent = f.readlines()
+        for i in range(len(keysize) - 1):
+            byte1 = f.read(keysize[i])
+            byte2 = f.read(keysize[i] + 1)
+            print(byte1, byte2)
 
-    print(f"{expected_difference=}", f"{actual_difference=}")
-    if expected_difference == actual_difference:
+
+    # for s in fcontent:
+    #    while byte := s[1]:
+    #        print(byte)
+
+    print(f"{test_expected_difference=}", f"{test_actual_difference=}")
+    if test_expected_difference == test_actual_difference:
         print("Test Yay")
     else:
         print("Test Nooo")
+        sys.exit()
+
+    for i in keysize:
+        pass
