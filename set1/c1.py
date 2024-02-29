@@ -13,7 +13,7 @@ if __name__ == "__main__":
     expected_b64 = r'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
     actual_b64 = hex_to_b64(hex_string)
 
-    print(expected_b64)
-    print(actual_b64)
+    print(f"{expected_b64=}")
+    print(f"{actual_b64=}")
     if expected_b64 == actual_b64:
         print("Success!")

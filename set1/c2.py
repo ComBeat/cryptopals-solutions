@@ -28,26 +28,26 @@ def xor_on_strings(s1, s2):
 if __name__ == "__main__":
     n1 = 0x1c0111001f010100061a024b53535009181c
     # n1 = r'1c0111001f010100061a024b53535009181c'
-    print(f'{n1=}')
+    print(f"{n1=}")
     print(f"{type(n1)=}")
 
     n2 = 0x686974207468652062756c6c277320657965
     # n2 = r'686974207468652062756c6c277320657965'
-    print(f'{n2=}')
+    print(f"{n2=}")
     print(f"{type(n2)=}")
 
     expected_xor = 0x746865206b696420646f6e277420706c6179
     # expected_xor = r'746865206b696420646f6e277420706c6179'
     print(f"{expected_xor=}")
     print(f"{type(expected_xor)=}")
-    if True:
-        # actual_xor = xor_on_int(n1, n2)
-        actual_xor = n1 ^ n2
-        # actual_xor = f"{int(hex(int(n1) ^ int(n2))): 'x'}"
-        print(f"{actual_xor=:x}")
-        print(f"{expected_xor=:x}")
 
-        if expected_xor == actual_xor:
-            print("Success!")
-        else:
-            print("Failure!")
+    # actual_xor = xor_on_int(n1, n2)
+    actual_xor = n1 ^ n2
+    # actual_xor = f"{int(hex(int(n1) ^ int(n2))): 'x'}"
+    print(f"{expected_xor=:x}")
+    print(f"{actual_xor=:x}")
+
+    if expected_xor == actual_xor:
+        print("Success!")
+    else:
+        print("Failure!")

@@ -14,4 +14,5 @@ if __name__ == "__main__":
     for i in lines:
         ascii_string = binascii.unhexlify(i)
         result_list.append(c3.find_xor_char(ascii_string))
+
     print(max(result_list))
