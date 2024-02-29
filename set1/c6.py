@@ -23,21 +23,24 @@ import sys
 
 
 def hamming_distance(s1, s2):
-    distance = 0
+    if True:
+        distance = 0
 
-    if len(s1) != len(s2):
-        distance = -1
+        if len(s1) != len(s2):
+            distance = -1
+            return distance
+
+        s1_decoded = base64.b64decode(s1)
+        s2_decoded = base64.b64decode(s2)
+
+        for byte1, byte2 in zip(s1_decoded, s2_decoded):
+            # XOR the bytes and count the differing bits
+            xor_result = byte1 ^ byte2
+            distance += bin(xor_result).count('1')
+
         return distance
-
-    s1_decoded = base64.b64decode(s1)
-    s2_decoded = base64.b64decode(s2)
-
-    for byte1, byte2 in zip(s1_decoded, s2_decoded):
-        # XOR the bytes and count the differing bits
-        xor_result = byte1 ^ byte2
-        distance += bin(xor_result).count('1')
-
-    return distance
+    else:
+        return sum([bin(s1[i] ^ s2[i]).count('1') for i in range(len(s1))])
 
 
 if __name__ == '__main__':
@@ -47,13 +50,16 @@ if __name__ == '__main__':
     test_expected_difference = 37
     #test_actual_difference = hamming_distance(base64.b64encode(bytes(test1, 'utf-8')), base64.b64encode(bytes(test2, 'utf-8')))
     test_actual_difference = hamming_distance(base64.b64encode(test1), base64.b64encode(test2))
+    #test_actual_difference = hamming_distance(test1, test2)
 
     with open('c6.txt', 'rb') as f:
         # fcontent = f.readlines()
-        for i in range(len(keysize) - 1):
-            byte1 = f.read(keysize[i])
-            byte2 = f.read(keysize[i] + 1)
+        for ks in range(len(keysize) - 1):
+            byte1 = f.read(keysize[ks])
+            f.seek(-keysize[ks], 1)
+            byte2 = f.read(keysize[ks] + 1)
             print(byte1, byte2)
+            print(hamming_distance(byte1, byte2))
 
 
     # for s in fcontent:
@@ -67,5 +73,5 @@ if __name__ == '__main__':
         print("Test Nooo")
         sys.exit()
 
-    for i in keysize:
+    for ks in keysize:
         pass
